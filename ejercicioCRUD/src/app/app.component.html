@@ -1,0 +1,44 @@
+<p class="mat-display-3">Mi Agenda
+</p>
+<mat-tab-group>
+    <mat-tab label="Mis contactos">
+        <ul>
+            <li *ngFor="let amigo of contactos">
+                {{amigo.nombre}} {{amigo.telefono}}
+            </li>
+        </ul>
+    </mat-tab>
+    <mat-tab label="Buscar contactos">
+        Introduce id del contacto:
+        <input type="text" [(ngModel)]="id">
+        <button (click)="buscar()">Buscar</button>
+        <div *ngIf="amigo!=null">
+            {{amigo.nombre}} {{amigo.telefono}}<br>
+            <hr>
+            <button (click)="borrar()">Eliminar contacto</button>
+            <button (click)="modificar()">Modificar contacto</button>
+        </div>
+        <div *ngIf="activarModificacion">
+            <form action="">
+                <label for="">Nombre</label>
+                <input type="text" formControlName="nombre">
+                <hr>
+                <label for="">Telefono</label>
+                <input type="number" formControlName="Telefono">
+                <button (click)="guardar()">Guardar contacto</button>
+            </form>
+        </div>
+    </mat-tab>
+    <mat-tab label="Nuevo contacto">
+        <form [formGroup]="amigoForm">
+            <label for="">Nombre</label>
+            <input type="text" formControlName="nombre">
+            <div *ngIf="amigoForm.get('nombre')?.invalid" [ngStyle]='{color: " red "} '>Longitud minima 3 caractéres</div>
+            <hr>
+            <label for=" ">Telefono</label>
+            <input type="number " formControlName="Telefono ">
+            <div *ngIf="amigoForm.get('telefono')?.invalid" [ngStyle]='{color: " red "} '>Debe tener 8 digitos y comenzar por el 6 o 7</div>
+            <button (click)="alta() ">Alta de contacto</button>
+        </form>
+    </mat-tab>
+</mat-tab-group>
