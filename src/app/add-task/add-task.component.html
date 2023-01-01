@@ -1,0 +1,24 @@
+<div>
+    <form (ngSubmit)="save()">
+        <div class="form-group">
+            <input class="form-group" id="textId" type="text" placeholder="Adiciona a la lista..." required minlength="3" [(ngModel)]="model.text" name="text" />
+        </div>
+        <button type='submit'>Adiciona a la lista</button>
+        <app-del-task routerLink="del-task">
+        </app-del-task>
+    </form>
+    <label class="label">Form Model: {{this.model | json}}</label><br />
+    <label class="label">List: {{this.items | json}}</label><br />
+</div>
+<div *ngIf="items.length > 0" class="mt-20">
+    <div *ngFor="let item of items" class="individual">
+        <div class="list-items">
+            <div class="items">
+                <input type="checkbox" id="check1" />
+                <label for="check1">
+          <div><i class="fa fa-check"></i></div> {{item.text || 'Add some thing'}}
+          </label>
+            </div>
+        </div>
+    </div>
+</div>
